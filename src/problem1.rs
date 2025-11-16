@@ -1,6 +1,14 @@
 use serde::Deserialize;
 use crate::requester;
 
+#[derive(Deserialize)]
+enum Size {
+    Small,
+    Medium,
+    Large,
+    American
+}
+
 fn get_raw_input(url: &str) -> String {
     match requester::get(&format!("{}/problem1/input", url)) {
         Ok(input) => input,
@@ -18,36 +26,27 @@ pub fn solve_and_post(url: &str) -> String {
 
 // =================BEGIN CODING=================
 
-#[derive(Deserialize)]
-enum Size {
-    Small,
-    Medium,
-    Large,
-    American
-}
-
 impl Size {
     fn get_size(&self) -> i32 {
         match self {
             Size::Small => 25,
-            _ => todo!("fill the rest of the match arms"),
+            Size::Medium => 29,
+            Size::Large => 35,
+            Size::American => 90,
         }
     }
 
-    fn from_str(size_as_string: &str) -> Result<Size, serde_json::Error> {
-        serde_json::from_str(size_as_string)
+    fn from_str(size_as_string: &str) -> Size {
+        match serde_json::from_str(size_as_string) {
+            Ok(size) => size,
+            Err(error)    => panic!("{:?}", error)
+        }
+
     }
 }
 
-fn parse_input(raw_input: String) -> Vec<Size> {
-    // you can use the from_str implementation from Size to parse each size to a Size object
-    todo!("parse the input into a vector of sizes")
-}
-
 fn solve(url: &str) -> i32 {
-    let input = parse_input(get_raw_input(url));
-    // you can map over the input with the .iter().map()
-    // in the map function you can give a lambda to parse each Size to an integer
-    // also, the .sum function can come in handy
-    todo!("device a solution for problem 1")
+    get_raw_input(url).split("\n")
+        .map(|raw_size| Size::from_str(raw_size))
+        .fold(0, |acc, size| acc + size.get_size())
 }
