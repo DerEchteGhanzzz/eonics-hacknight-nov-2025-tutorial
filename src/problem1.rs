@@ -9,11 +9,8 @@ enum Size {
     American
 }
 
-fn get_raw_input(url: &str) -> String {
-    match requester::get(&format!("{}/problem1/input", url)) {
-        Ok(input) => input,
-        Err(error) => panic!("{:?}", error),
-    }
+fn get_input(url: &str) -> Vec<String> {
+    requester::get_elements(&format!("{url}/problem1/input"))
 }
 
 // post the solution to /solve1
@@ -30,27 +27,27 @@ impl Size {
     fn get_size(&self) -> i32 {
         match self {
             Size::Small => 25,
-            Size::Medium => 29,
-            Size::Large => 35,
-            Size::American => 90,
+            _           => todo!("finish the match expression by filling in the rest of the sizes"),
         }
     }
 
     fn from_str(size_as_string: &str) -> Size {
         match size_as_string {
             "Small" => Size::Small,
-            "Medium" => Size::Medium,
-            "Large" => Size::Large,
-            "American" => Size::American,
-            _ => panic!("Not a size!"),
+            _       => todo!("finish the match expression by filling in the rest of the names")
         }
     }
 }
 
-const PI: i32 = 3;
-
 fn solve(url: &str) -> i32 {
-    get_raw_input(url).split("\r\n")
-        .map(|raw_size| Size::from_str(raw_size).get_size())
-        .fold(0, |acc, z| acc + PI * z * z)
+    /*
+        This exersize is to show off the Enums rust have.
+        You don't need to use the enum declared above, but to get a better understanding
+        of how pattern matching works in rust, you can try to finish the code
+
+        use the get_input(url) function to get the input from problem 1
+        try to use the .iter().map() functions to map each element from the input to its size and calculate the area
+     */
+    println!("Implement problem 1");
+    -1
 }

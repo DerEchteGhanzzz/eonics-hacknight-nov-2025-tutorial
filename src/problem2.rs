@@ -8,15 +8,15 @@ pub fn solve_and_post(url: &str) -> String {
     }
 }
 
-// =================BEGIN CODING=================
-
-fn get_items(url: &str) -> Vec<String> {
-    // match the result from the api call, it is Ok, or an Error
-    match requester::get(url) {
-        Ok(raw_input) => raw_input.split("\n").map(|s| String::from(s)).collect::<Vec<_>>(),
-        Err(error)     => panic!("{}", error),
-    }
+fn get_menu(url: &str) -> Vec<String> {
+    requester::get_elements(&format!("{url}/menu"))
 }
+
+
+fn get_input(url: &str) -> Vec<String> {
+    requester::get_elements(&format!("{url}/problem2/input"))
+}
+
 
 fn get_ingredients(url: &str, pizza: &str) -> Vec<String> {
     // match the result from the api call, it is Ok, or an Error
@@ -26,20 +26,15 @@ fn get_ingredients(url: &str, pizza: &str) -> Vec<String> {
     }
 }
 
-fn count_ingredients(ingredients: Vec<String>, storage: &Vec<String>) -> i32 {
-    let mut counts = ingredients.iter().map(|_| 0).collect::<Vec<_>>();
-    for item in storage {
-        if let Some(position) = ingredients.iter().position(|i| i == item) {
-            counts[position] += 1;
-        }
-    }
-    return *counts.iter().min().unwrap()
-}
+// =================BEGIN CODING=================
 
 fn solve(url: &str) -> Vec<i32> {
-    let storage = get_items(&format!("{}/problem2/input", url));
-    let menu = get_items(&format!("{}/menu", url));
-    menu
-        .iter().map(|p| get_ingredients(url, p))
-        .map(|ingredients| count_ingredients(ingredients, &storage)).collect()
+    /*
+        You can use the get_ingredients function to perform a GET request with a pizza name as a parameter
+        Try to use the map function to map each menu item to its ingredients and then map those ingredients to their occurrances
+     */
+    let menu = get_menu(url);
+    let storage = get_input(url);
+    println!("Implement problem 2");
+    vec![-1, -1, -1]
 }
