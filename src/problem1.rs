@@ -20,7 +20,7 @@ fn get_raw_input(url: &str) -> String {
 pub fn solve_and_post(url: &str) -> String {
     match requester::post(&format!("{}/problem1/solve", url), &solve(url)) {
         Ok(answer) => answer,
-        Err(error)  => error.to_string(),
+        Err(error)  => panic!("{:?}", error),
     }
 }
 
@@ -37,16 +37,20 @@ impl Size {
     }
 
     fn from_str(size_as_string: &str) -> Size {
-        match serde_json::from_str(size_as_string) {
-            Ok(size) => size,
-            Err(error)    => panic!("{:?}", error)
+        match size_as_string {
+            "Small" => Size::Small,
+            "Medium" => Size::Medium,
+            "Large" => Size::Large,
+            "American" => Size::American,
+            _ => panic!("Not a size!"),
         }
-
     }
 }
 
+const PI: i32 = 3;
+
 fn solve(url: &str) -> i32 {
-    get_raw_input(url).split("\n")
-        .map(|raw_size| Size::from_str(raw_size))
-        .fold(0, |acc, size| acc + size.get_size())
+    get_raw_input(url).split("\r\n")
+        .map(|raw_size| Size::from_str(raw_size).get_size())
+        .fold(0, |acc, z| acc + PI * z * z)
 }
