@@ -15,9 +15,9 @@ pub struct HeadersEcho {
 fn main() -> Result<()> {
     let url: &str = "http://localhost:80";
     
-    println!("Answer 1: {}\n", problem1::solve_and_post(url));
-    println!("Answer 2: {}\n", problem2::solve_and_post(url));
-    println!("Answer 3: {}\n", problem3::solve_and_post(url));
+    println!("Answer 1:\n{}", problem1::solve_and_post(url));
+    println!("Answer 2:\n{}", problem2::solve_and_post(url));
+    println!("Answer 3:\n{}", problem3::solve_and_post(url));
     
     Ok(())
 }
