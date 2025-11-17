@@ -35,22 +35,25 @@ fn parse_input(input: Vec<String>) -> HashMap<String, HashMap<String, i32>> {
     return dist;
 }
 
-fn tsp(dist: &HashMap<String, HashMap<String, i32>>, current: i32, visited: Vec<&String>) -> i32 {
+fn tsp(dist: &HashMap<String, HashMap<String, i32>>, current: i32, visited: Vec<&String>, ub: i32) -> i32 {
     if visited.len() == dist.keys().len() {
         return current + dist.get(*visited.last().unwrap()).unwrap().get(visited[0]).unwrap();
     }
-    let mut best = i32::MAX;
+    if current >= ub {
+        return ub;
+    }
+    let mut best = ub;
     let next = dist.get(*visited.last().unwrap()).unwrap();
     for (target, distance) in next {
         if visited.contains(&target) {
             continue;
         }
-        best = best.min(tsp(dist, current + distance, visited.clone().into_iter().chain(vec![target]).collect::<Vec<_>>()))
+        best = best.min(tsp(dist, current + distance, visited.clone().into_iter().chain(vec![target]).collect::<Vec<_>>(), best))
     }
     return best
 }
 
 fn solve(url: &str) -> i32 {
     let dist = parse_input(get_input(url));
-    tsp(&dist, 0, vec![dist.keys().next().unwrap()])
+    tsp(&dist, 0, vec![dist.keys().next().unwrap()], i32::MAX)
 }
