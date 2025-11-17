@@ -47,6 +47,9 @@ fn solve(url: &str) -> i32 {
 
         use the get_input(url) function to get the input from problem 1
         try to use the .iter().map() functions to map each element from the input to its size and calculate the area
+
+        You can make an instance of the Size enum by calling Size::from_str(s)
+        if you have a variable size: Size, you can get its size by calling size.get_size()
      */
     println!("Implement problem 1");
     -1
