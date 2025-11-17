@@ -50,6 +50,8 @@ fn solve(url: &str) -> i32 {
 
         You can make an instance of the Size enum by calling Size::from_str(s)
         if you have a variable size: Size, you can get its size by calling size.get_size()
+
+        Feel free to tinker around and ask questions, and most important of all have fun!
      */
     println!("Implement problem 1");
     -1
