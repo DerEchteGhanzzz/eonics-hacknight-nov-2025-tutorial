@@ -14,6 +14,6 @@ fn solve(url: &str) -> i32 {
     /*
     For this problem you might want to use `cargo run --release` to make the calculations a bit quicker
     */
-
-    todo!("device a solution for problem 3")
+    println!("Implement problem 3");
+    -1
 }
