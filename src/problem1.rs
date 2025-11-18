@@ -15,7 +15,9 @@ fn get_input(url: &str) -> Vec<String> {
 
 // post the solution to /solve1
 pub fn solve_and_post(url: &str) -> String {
-    match requester::post(&format!("{}/problem1/solve", url), &solve(url)) {
+    let solution = solve(url);
+    println!("Answer 1: {}", solution);
+    match requester::post(&format!("{}/problem1/solve", url), &solution) {
         Ok(answer) => answer,
         Err(error)  => panic!("{:?}", error),
     }
@@ -24,13 +26,18 @@ pub fn solve_and_post(url: &str) -> String {
 // =================BEGIN CODING=================
 
 impl Size {
-    fn get_size(&self) -> i32 {
+
+    // this is a function called on an instance of the Size enum
+    // (identifiable by the &self that gets passed along)
+    // call it as if calling it on some size: Size variable with size.get_size()
+    fn get_size(&self) -> u32 {
         match self {
             Size::Small => 25,
             _           => todo!("finish the match expression by filling in the rest of the sizes"),
         }
     }
 
+    // this is a static function, call it by writing Size::from_str()
     fn from_str(size_as_string: &str) -> Size {
         match size_as_string {
             "Small" => Size::Small,
@@ -39,9 +46,10 @@ impl Size {
     }
 }
 
-fn solve(url: &str) -> i32 {
+// use the url as function parameter in get_input()
+fn solve(url: &str) -> u32 {
     /*
-        This exersize is to show off the Enums rust have.
+        This exercise is to show off the Enums rust has.
         You don't need to use the enum declared above, but to get a better understanding
         of how pattern matching works in rust, you can try to finish the code
 
@@ -54,5 +62,5 @@ fn solve(url: &str) -> i32 {
         Feel free to tinker around and ask questions, and most important of all have fun!
      */
     println!("Implement problem 1");
-    -1
+    0
 }

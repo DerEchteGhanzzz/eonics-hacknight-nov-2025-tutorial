@@ -2,7 +2,9 @@ use crate::requester;
 
 // post the solution to /solve2
 pub fn solve_and_post(url: &str) -> String {
-    match requester::post(&format!("{}/problem2/solve", url), &solve(url)) {
+    let solution = solve(url);
+    println!("Answer 2: {:?}", solution);
+    match requester::post(&format!("{}/problem2/solve", url), &solution) {
         Ok(answer) => answer,
         Err(error)  => error.to_string(),
     }
@@ -30,6 +32,10 @@ fn get_ingredients(url: &str, pizza: &str) -> Vec<String> {
 
 fn solve(url: &str) -> Vec<i32> {
     /*
+        Calculate for each pizza type <u>separately</u> how many can be made with the ingredients in the storage.
+        Send your result as a formatted vector like: `[0, 0, 0, ..]` (use: `format!(\"{{:?}}\", result)` to turn your vector into a string) to /problem2/answer. 
+        Each index in the list corresponds with each item on our menu.
+
         You can use the get_ingredients function to perform a GET request with a pizza name as a parameter
         Try to use the map function to map each menu item to its ingredients and then map those ingredients to their occurrances
      */
