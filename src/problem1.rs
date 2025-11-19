@@ -24,7 +24,7 @@ pub fn solve_and_post(url: &str) -> String {
 // =================BEGIN CODING=================
 
 impl Size {
-    fn get_size(&self) -> i32 {
+    fn get_size(&self) -> u32 {
         match self {
             Size::Small => 25,
             _           => todo!("finish the match expression by filling in the rest of the sizes"),
@@ -39,7 +39,8 @@ impl Size {
     }
 }
 
-fn solve(url: &str) -> i32 {
+fn solve(url: &str) -> u32 {
+    let input = get_input(url);
     /*
         This exersize is to show off the Enums rust have.
         You don't need to use the enum declared above, but to get a better understanding

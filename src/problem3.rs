@@ -10,10 +10,10 @@ pub fn solve_and_post(url: &str) -> String {
 
 // =================BEGIN CODING=================
 
-fn solve(url: &str) -> i32 {
+fn solve(url: &str) -> u32 {
     /*
     For this problem you might want to use `cargo run --release` to make the calculations a bit quicker
     */
     println!("Implement problem 3");
-    -1
+    0
 }
