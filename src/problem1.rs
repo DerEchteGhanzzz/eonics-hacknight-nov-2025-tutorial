@@ -42,7 +42,7 @@ impl Size {
             "Medium" => Size::Medium,
             "Large" => Size::Large,
             "American" => Size::American,
-            _ => panic!("Not a size!"),
+            _ => panic!("{} Not a size!", size_as_string),
         }
     }
 }
@@ -50,7 +50,7 @@ impl Size {
 const PI: i32 = 3;
 
 fn solve(url: &str) -> i32 {
-    get_raw_input(url).split("\r\n")
+    get_raw_input(url).split("\n")
         .map(|raw_size| Size::from_str(raw_size).get_size())
         .fold(0, |acc, z| acc + PI * z * z)
 }
