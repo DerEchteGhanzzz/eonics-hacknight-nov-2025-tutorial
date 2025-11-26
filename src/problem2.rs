@@ -22,7 +22,7 @@ fn get_input(url: &str) -> Vec<String> {
 
 fn get_ingredients(url: &str, pizza: &str) -> Vec<String> {
     // match the result from the api call, it is Ok, or an Error
-    match requester::get_with_param(&format!("{url}/ingredients"), ("pizza", pizza)) {
+    match requester::get_with_param(&format!("{url}/ingredients"), vec![("pizza", pizza)]) {
         Ok(raw_input) => raw_input.split("\n").map(|s| String::from(s)).collect::<Vec<_>>(),
         Err(error)     => panic!("{}", error),
     }

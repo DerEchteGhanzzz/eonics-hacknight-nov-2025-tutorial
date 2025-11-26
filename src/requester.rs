@@ -21,8 +21,8 @@ pub fn get(url: &str) -> Result<String, Error> {
     )
 }
 
-pub fn get_with_param(url: &str, param: (&str, &str)) -> Result<String, Error> {
-    let url = Url::parse_with_params(url, [param])?;
+pub fn get_with_param(url: &str, params: Vec<(&str, &str)>) -> Result<String, Error> {
+    let url = Url::parse_with_params(url, params)?;
     let response = Client::new()
         .get(url).send()?.text()?;
     Ok(response)
